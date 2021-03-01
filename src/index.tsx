@@ -1,3 +1,4 @@
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import React from 'react';
@@ -9,15 +10,22 @@ import Routes from './Routes';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme';
 
+const client = new ApolloClient({
+  uri: 'https://rickandmortyapi.com/graphql',
+  cache: new InMemoryCache(),
+});
+
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-    <CssBaseline />
-    <Router basename={process.env.BASE_URL || '/'}>
-      <ScrollToTop />
-      <Routes />
-    </Router>
-  </ThemeProvider>,
+  <ApolloProvider client={client}>
+    <ThemeProvider theme={theme}>
+      {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+      <CssBaseline />
+      <Router basename={process.env.BASE_URL || '/'}>
+        <ScrollToTop />
+        <Routes />
+      </Router>
+    </ThemeProvider>
+  </ApolloProvider>,
   document.querySelector('#root')
 );
 
