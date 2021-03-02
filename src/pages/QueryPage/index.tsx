@@ -30,6 +30,7 @@ export const QueryPage = () => {
       console.log('onCompleted query', data);
     },
   });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data: settingsData, refetch } = useQuery(SETTINGS_QUERY, {
     // fetchPolicy: 'cache-only', // @client in the query does the same thing
     onCompleted: (data) => {
