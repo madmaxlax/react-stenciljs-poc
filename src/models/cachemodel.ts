@@ -1,8 +1,9 @@
-import { InMemoryCache } from '@apollo/client';
+import { InMemoryCache, makeVar, ReactiveVar } from '@apollo/client';
 
 export interface UserSettings {
   mobile: boolean;
   preferredName: string;
+  favoriteColor?: string;
 }
 const initialUserSettings: UserSettings = {
   preferredName: 'Max',
@@ -14,8 +15,10 @@ export const cacheMoney: InMemoryCache = new InMemoryCache({
     Query: {
       fields: {
         UserSettings: {
-          read() {
-            return initialUserSettings;
+          read(existing, { variables }) {
+            console.log(existing, variables);
+            if (!existing) return initialUserSettings;
+            else return existing;
           },
         },
       },
@@ -36,5 +39,16 @@ export const cacheMoney: InMemoryCache = new InMemoryCache({
     },
   },
 });
-
+makeVar;
 export const initialUserSettingsVar = cacheMoney.makeVar<UserSettings>(initialUserSettings);
+export function addColor(userSettingsVar: ReactiveVar<UserSettings>) {
+  return (newColor = 'green') => {
+    //get latest value of the settings
+    const currVal = userSettingsVar();
+    //update the color
+    currVal.favoriteColor = newColor;
+    console.log('addedSettings');
+    //set the new value
+    userSettingsVar(currVal);
+  };
+}

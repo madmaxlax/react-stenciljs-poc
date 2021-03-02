@@ -1,5 +1,7 @@
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery, useReactiveVar } from '@apollo/client';
+import { Button } from '@material-ui/core';
 import React from 'react';
+import { addColor, initialUserSettingsVar } from '../../models/cachemodel';
 import { Character } from '../../models/types';
 
 const CHARACTERS_QUERY = gql`
@@ -24,23 +26,39 @@ const SETTINGS_QUERY = gql`
 
 export const QueryPage = () => {
   const { loading, error, data } = useQuery(CHARACTERS_QUERY, {
-    onCompleted: () => {
-      console.log('onCompleted');
+    onCompleted: (data) => {
+      console.log('onCompleted query', data);
     },
   });
-  console.log('got data', data);
-  const { data: settingsData } = useQuery(SETTINGS_QUERY, {
+  const { data: settingsData, refetch } = useQuery(SETTINGS_QUERY, {
     // fetchPolicy: 'cache-only', // @client in the query does the same thing
+    onCompleted: (data) => {
+      console.log('onCompleted query', data);
+    },
   });
   console.log(settingsData);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  const otherSettingsData = useReactiveVar(initialUserSettingsVar);
 
-  return data?.characters?.results.map((character: Character, index: number) => (
-    <div key={index}>
-      <p>
-        {character.name}: {character.gender}
-      </p>
-    </div>
-  ));
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :({error})</p>;
+
+  return (
+    <>
+      <Button
+        onClick={() => {
+          addColor(initialUserSettingsVar)(); //why doesn't this work?
+          // initialUserSettingsVar({ ...initialUserSettingsVar(), favoriteColor: 'blue' });
+        }}
+      >
+        Fav Color: {otherSettingsData.favoriteColor} Add Color
+      </Button>
+      {data?.characters?.results.map((character: Character, index: number) => (
+        <div key={index}>
+          <p>
+            {character.name}: {character.gender}
+          </p>
+        </div>
+      ))}
+    </>
+  );
 };
