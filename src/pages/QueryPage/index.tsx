@@ -13,10 +13,26 @@ const CHARACTERS_QUERY = gql`
     }
   }
 `;
+const SETTINGS_QUERY = gql`
+  query settingsq {
+    UserSettings @client {
+      mobile
+      preferredName
+    }
+  }
+`;
 
 export const QueryPage = () => {
-  const { loading, error, data } = useQuery(CHARACTERS_QUERY);
-  console.log(data);
+  const { loading, error, data } = useQuery(CHARACTERS_QUERY, {
+    onCompleted: () => {
+      console.log('onCompleted');
+    },
+  });
+  console.log('got data', data);
+  const { data: settingsData } = useQuery(SETTINGS_QUERY, {
+    // fetchPolicy: 'cache-only', // @client in the query does the same thing
+  });
+  console.log(settingsData);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 

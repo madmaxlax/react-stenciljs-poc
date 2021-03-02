@@ -1,4 +1,4 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloProvider } from '@apollo/client';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import React from 'react';
@@ -6,13 +6,14 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './assets/css/index.css';
 import ScrollToTop from './components/ScrollToTop';
+import { cacheMoney } from './models/cachemodel';
 import Routes from './Routes';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme';
 
 const client = new ApolloClient({
   uri: 'https://rickandmortyapi.com/graphql',
-  cache: new InMemoryCache(),
+  cache: cacheMoney,
 });
 
 ReactDOM.render(
