@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.3.11",
+    "@apollo/client": "latest",
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
     "@material-ui/core": "next",
@@ -12,6 +12,7 @@
     "@types/react-dom": "latest",
     "@types/react-router-dom": "latest",
     "clsx": "latest",
+    "graphql": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-router-dom": "latest",
@@ -28,7 +29,11 @@
     "gql-codegen": "graphql-codegen --config codegen.yml"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "1.21.1",
+    "@graphql-codegen/cli": "latest",
+    "@graphql-codegen/introspection": "latest",
+    "@graphql-codegen/typescript": "latest",
+    "@graphql-codegen/typescript-operations": "latest",
+    "@graphql-codegen/typescript-react-apollo": "latest",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
     "babel-eslint": "latest",
@@ -38,11 +43,7 @@
     "eslint-plugin-prettier": "latest",
     "husky": "latest",
     "lint-staged": "latest",
-    "prettier": "latest",
-    "@graphql-codegen/typescript-operations": "1.17.14",
-    "@graphql-codegen/typescript": "1.21.0",
-    "@graphql-codegen/typescript-react-apollo": "2.2.1",
-    "@graphql-codegen/introspection": "1.18.1"
+    "prettier": "latest"
   },
   "husky": {
     "hooks": {

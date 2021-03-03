@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import clsx from 'clsx';
 import React from 'react';
@@ -16,16 +16,27 @@ const Footer = (props: ClassNameProps) => {
   const classes = useStyles();
 
   return (
-    <div className={clsx(classes.footerRoot, className)}>
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" to="https://material-ui.com/">
-          Your Website
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    </div>
+    <Grid
+      container
+      direction="column"
+      justifyContent="space-between"
+      alignItems="stretch"
+      className={clsx(classes.footerRoot, className)}
+    >
+      <Grid item container justifyContent="center" alignItems="stretch">
+        <Grid item container xs={12} justifyContent="center" alignItems="stretch">
+          <Typography variant="body2" color="textSecondary" align="center">
+            {'Copyright © '}
+            <Link color="inherit" to="https://material-ui.com/">
+              Your Website
+            </Link>{' '}
+            {new Date().getFullYear()}
+            {'.'}
+          </Typography>
+        </Grid>
+      </Grid>
+      <Footer />
+    </Grid>
   );
 };
 

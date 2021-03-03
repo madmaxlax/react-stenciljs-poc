@@ -1,6 +1,7 @@
-import { gql, useQuery, useReactiveVar } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import { Button } from '@material-ui/core';
 import React from 'react';
+import { Link } from '../../components';
 import { addColor, initialUserSettingsVar } from '../../models/cachemodel';
 import { Character } from '../../models/types';
 
@@ -26,32 +27,29 @@ const SETTINGS_QUERY = gql`
 
 export const QueryPage = () => {
   const { loading, error, data } = useQuery(CHARACTERS_QUERY, {
-    onCompleted: (data) => {
-      console.log('onCompleted query', data);
-    },
+    onCompleted: () => {},
   });
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data: settingsData, refetch } = useQuery(SETTINGS_QUERY, {
     // fetchPolicy: 'cache-only', // @client in the query does the same thing
-    onCompleted: (data) => {
-      console.log('onCompleted query', data);
-    },
+    onCompleted: () => {},
   });
-  console.log(settingsData);
-  const otherSettingsData = useReactiveVar(initialUserSettingsVar);
+  // const mySettingsData = useReactiveVar(initialUserSettingsVar);
+  // const otherSettingsData = useReactiveVar(otherVar);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :({error})</p>;
-
   return (
     <>
+      {/* <Typography>Fav Color: {mySettingsData.favoriteColor}</Typography>
+      <Typography>Other fav Color: {otherSettingsData.favoriteColor}</Typography> */}
       <Button
         onClick={() => {
           addColor(initialUserSettingsVar)(); //why doesn't this work?
           // initialUserSettingsVar({ ...initialUserSettingsVar(), favoriteColor: 'blue' });
         }}
       >
-        Fav Color: {otherSettingsData.favoriteColor} Add Color
+        Add Color
       </Button>
       {data?.characters?.results.map((character: Character, index: number) => (
         <div key={index}>
@@ -60,6 +58,7 @@ export const QueryPage = () => {
           </p>
         </div>
       ))}
+      <Link to="/query">link back</Link>
     </>
   );
 };
