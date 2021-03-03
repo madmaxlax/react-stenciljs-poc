@@ -8,7 +8,7 @@ import { LayoutProps } from '../../utils/types';
 const useStyles = makeStyles((theme: CustomTheme) => ({
   minimalRoot: {},
   main: {
-    minHeight: '300px',
+    minHeight: '90vh',
   },
   leftSide: {
     backgroundColor: theme.palette.primary.main,
@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
 }));
 
 const Minimal = (props: LayoutProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { children, layoutprops } = props;
 
   const classes = useStyles();
