@@ -8,7 +8,7 @@ import { LayoutProps } from '../../utils/types';
 const useStyles = makeStyles((theme: CustomTheme) => ({
   minimalRoot: {},
   main: {
-    minHeight: '300px',
+    minHeight: '90vh',
   },
   leftSide: {
     backgroundColor: theme.palette.primary.main,

@@ -9,6 +9,7 @@ import { Link } from './Link';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const useStyles = makeStyles((theme: CustomTheme) => ({
   footerRoot: {},
+  footerContainer: { minHeight: 100 },
 }));
 
 const Footer = (props: ClassNameProps) => {
@@ -23,19 +24,16 @@ const Footer = (props: ClassNameProps) => {
       alignItems="stretch"
       className={clsx(classes.footerRoot, className)}
     >
-      <Grid item container justifyContent="center" alignItems="stretch">
-        <Grid item container xs={12} justifyContent="center" alignItems="stretch">
-          <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" to="https://material-ui.com/">
-              Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-          </Typography>
-        </Grid>
+      <Grid item container justifyContent="center" alignItems="center" className={classes.footerContainer}>
+        <Typography variant="body2" color="textSecondary" align="center">
+          {'Copyright © '}
+          <Link color="inherit" to="https://material-ui.com/">
+            Your Website
+          </Link>{' '}
+          {new Date().getFullYear()}
+          {'.'}
+        </Typography>
       </Grid>
-      <Footer />
     </Grid>
   );
 };
