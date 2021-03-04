@@ -45,9 +45,9 @@ export function addColor(userSettingsVar: ReactiveVar<UserSettings>) {
   return (newColor = 'green') => {
     console.log('adding color', newColor);
     //get latest value of the settings
-    const currVal = userSettingsVar();
     //update the color
-    currVal.favoriteColor = newColor;
+    const currVal = { ...userSettingsVar(), favoriteColor: newColor };
+
     //set the new value
     userSettingsVar(currVal);
   };
