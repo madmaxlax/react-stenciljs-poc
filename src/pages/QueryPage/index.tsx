@@ -1,7 +1,8 @@
 import { gql, useQuery, useReactiveVar } from '@apollo/client';
-import { Button, Typography } from '@material-ui/core';
+import { Button, Grid, Typography } from '@material-ui/core';
 import React from 'react';
 import { Link } from '../../components';
+import { AppHome } from '../../components/stencil/stencilcomponents';
 import { addColor, initialUserSettingsVar, otherVar } from '../../models/cachemodel';
 import { Character } from '../../models/types';
 
@@ -41,25 +42,32 @@ export const QueryPage = () => {
   if (error) return <p>Error :({error})</p>;
   return (
     <>
-      <Typography>Fav Color: {mySettingsData.favoriteColor}</Typography>
-      <Typography>Other fav Color: {otherSettingsData.favoriteColor}</Typography>
-      <Button
-        onClick={() => {
-          addColor(initialUserSettingsVar)(); //why doesn't this work?
-          addColor(otherVar)(); //why doesn't this work?
-          // initialUserSettingsVar({ ...initialUserSettingsVar(), favoriteColor: 'blue' });
-        }}
-      >
-        Add Color
-      </Button>
-      {data?.characters?.results.map((character: Character, index: number) => (
-        <div key={index}>
-          <p>
-            {character.name}: {character.gender}
-          </p>
-        </div>
-      ))}
-      <Link to="/query">link back</Link>
+      <Grid container>
+        <Grid item xs={6}>
+          <AppHome />
+        </Grid>
+        <Grid item xs={6}>
+          <Typography>Fav Color: {mySettingsData.favoriteColor}</Typography>
+          <Typography>Other fav Color: {otherSettingsData.favoriteColor}</Typography>
+          <Button
+            onClick={() => {
+              addColor(initialUserSettingsVar)(); //why doesn't this work?
+              addColor(otherVar)(); //why doesn't this work?
+              // initialUserSettingsVar({ ...initialUserSettingsVar(), favoriteColor: 'blue' });
+            }}
+          >
+            Add Color
+          </Button>
+          {data?.characters?.results.map((character: Character, index: number) => (
+            <div key={index}>
+              <p>
+                {character.name}: {character.gender}
+              </p>
+            </div>
+          ))}
+          <Link to="/query">link back</Link>
+        </Grid>
+      </Grid>
     </>
   );
 };

@@ -8,6 +8,7 @@
     "@emotion/styled": "latest",
     "@material-ui/core": "next",
     "@material-ui/icons": "latest",
+    "@stencil/core": "^2.4.0",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/react-router-dom": "latest",
@@ -17,7 +18,8 @@
     "react-dom": "latest",
     "react-router-dom": "latest",
     "react-scripts": "latest",
-    "typescript": "latest"
+    "typescript": "latest",
+    "react-stencil-components": "/Users/struevermax/dev/fmg/stencil-starter/dist"
   },
   "scripts": {
     "clean": "rm -rf node_modules && rm -rf yarn.lock",
