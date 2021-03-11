@@ -45,6 +45,8 @@ export const QueryPage = () => {
       <Grid container>
         <Grid item xs={6}>
           <AppHome />
+          <br />
+          <app-home />
         </Grid>
         <Grid item xs={6}>
           <Typography>Fav Color: {mySettingsData.favoriteColor}</Typography>

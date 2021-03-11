@@ -11,14 +11,14 @@ import { cacheMoney } from './models/cachemodel';
 import Routes from './Routes';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme';
-// declare global {
-//   // eslint-disable-next-line @typescript-eslint/no-namespace
-//   namespace JSX {
-//     interface IntrinsicElements {
-//       'app-home': { me?: string };
-//     }
-//   }
-// }
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      'app-home': { me?: string };
+    }
+  }
+}
 const client = new ApolloClient({
   uri: 'https://rickandmortyapi.com/graphql',
   cache: cacheMoney,
