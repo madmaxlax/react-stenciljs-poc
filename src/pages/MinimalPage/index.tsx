@@ -18,6 +18,8 @@ export const MinimalPage = () => {
       <Grid item>
         <div className={classes.root}>
           <h1>First Page!</h1>
+          <Link to="/query">Query</Link>
+          <br />
           <Link to="/main/page-name">Route: main page</Link>
           <br />
           <Link to="/doesntexist">Route: page that doesnt exist</Link>
